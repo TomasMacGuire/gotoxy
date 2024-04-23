@@ -1,0 +1,87 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "gotoxy.h"
+#include <conio.h>
+
+int main()
+{
+
+    char opcion;
+    int x=0;
+    int y=0;
+    int i=0;
+    char msg[]="ESC PARA SALIR // F1-F5 PARA CAMBIAR COLOR // FLECHAS PARA MOVERSE";
+    char salida[]="GRACIAS POR USAR NUESTRO SISTEMA :)";
+    char c=178;
+
+    color(6);
+    gotoxy(3,25);
+    printf("%s", msg);
+
+    gotoxy(0,0);
+    do{
+        opcion=getch();
+//        printf("%c", c);
+        switch(opcion){
+        case 27:
+            while(!kbhit()){
+                gotoxy(rand()%60,rand()%24);
+                color(i);
+                printf("%s", salida);
+                Sleep(500);
+                i++;
+                system("cls");
+            }
+            break;
+        case 59:
+            color(2);
+            break;
+        case 60:
+            color(3);
+            break;
+        case 61:
+            color(78);
+            break;
+        case 62:
+            color(15);
+        case 63:
+            color(133);
+            break;
+        case 72: ///ARRIBA
+            if(y>0){
+                y--;
+                gotoxy(x,y);
+                printf("%c", c);
+            }else{
+                Beep(550,550);
+            }
+            break;
+        case 75:///IZQUIERDA
+            if(x>0){
+                x--;
+                gotoxy(x,y);
+                printf("%c", c);
+            }else{
+                Beep(550,550);
+            }
+
+            break;
+        case 80:///ABAJO
+            if(y<23){
+                y++;
+                gotoxy(x,y);
+                printf("%c", c);
+            }
+            break;
+        case 77:///DERECHA
+            if(x<80){
+                x++;
+                gotoxy(x,y);
+                printf("%c", c);
+            }
+            break;
+        }
+    }while(opcion!=27);
+
+    return 0;
+}
